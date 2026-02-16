@@ -1,0 +1,9 @@
+[submodule "web_servana"]
+	path = web_servana
+	url = https://github.com/kurtbuset/web_servana.git
+[submodule "mobile_servana"]
+	path = mobile_servana
+	url = https://github.com/kurtbuset/mobile_servana.git
+[submodule "backend_servana"]
+	path = backend_servana
+	url = https://github.com/kurtbuset/backend_servana.git
