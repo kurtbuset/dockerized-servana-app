@@ -4,9 +4,9 @@ services:
   # Backend Service (Node.js)
   backend:
     build:
-      context: ./servana_backend
+      context: ./backend_servana
       dockerfile: Dockerfile
-    container_name: servana_backend
+    container_name: backend_servana
     ports:
       - "5000:5000"
     environment:
@@ -19,9 +19,9 @@ services:
       - REACT_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzcxMTcxMjAwLCJleHAiOjE5Mjg5Mzc2MDB9.Z3HJwzXPQWDQr1qnr37vNnO8NmJuQoEsccV8JR2Dt-0
       - REACT_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJpYXQiOjE3NzExNzEyMDAsImV4cCI6MTkyODkzNzYwMH0.CHslo1k5Fy_i-RCeys2O7BfLvtgFoqsSQn4XdatfQvA
     env_file:
-      - ./servana_backend/.env
+      - ./backend_servana/.env
     volumes:
-      - ./servana_backend:/app
+      - ./backend_servana:/app
       - /app/node_modules
     networks:
       - servana_network
@@ -32,13 +32,13 @@ services:
   # Frontend Service (React)
   frontend:
     build:
-      context: ./servana_web
+      context: ./web_servana
       dockerfile: Dockerfile
       args:
         - VITE_BACKEND_URL=http://localhost:5000
         - VITE_SOCKET_URL=http://localhost:5000
         - NODE_ENV=production
-    container_name: servana_frontend
+    container_name: web_servana
     ports:
       - "3000:80"
     depends_on:
