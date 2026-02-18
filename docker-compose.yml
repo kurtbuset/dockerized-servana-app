@@ -9,15 +9,6 @@ services:
     container_name: backend_servana
     ports:
       - "5000:5000"
-    environment:
-      - NODE_ENV=development
-      - PORT=5000
-      - REACT_WEB_URL=http://localhost:3000
-      - REACT_WEB_PRODUCTION_URL=http://frontend:3000
-      # Connect to LibriLens Supabase via internal network
-      - REACT_SUPABASE_URL=http://supabase-kong:8000
-      - REACT_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzcxMTcxMjAwLCJleHAiOjE5Mjg5Mzc2MDB9.Z3HJwzXPQWDQr1qnr37vNnO8NmJuQoEsccV8JR2Dt-0
-      - REACT_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJpYXQiOjE3NzExNzEyMDAsImV4cCI6MTkyODkzNzYwMH0.CHslo1k5Fy_i-RCeys2O7BfLvtgFoqsSQn4XdatfQvA
     env_file:
       - ./backend_servana/.env
     volumes:
@@ -34,13 +25,11 @@ services:
     build:
       context: ./web_servana
       dockerfile: Dockerfile
-      args:
-        - VITE_BACKEND_URL=http://localhost:5000
-        - VITE_SOCKET_URL=http://localhost:5000
-        - NODE_ENV=production
     container_name: web_servana
     ports:
       - "3000:80"
+    env_file:
+      - ./web_servana/.env
     depends_on:
       - backend
     networks:
