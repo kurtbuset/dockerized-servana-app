@@ -25,11 +25,18 @@ services:
     build:
       context: ./web_servana
       dockerfile: Dockerfile
+      args:
+        VITE_BACKEND_URL: http://localhost:5000
+        VITE_SOCKET_URL: http://localhost:5000
+        NODE_ENV: development
     container_name: web_servana
     ports:
       - "3000:80"
     env_file:
       - ./web_servana/.env
+    volumes:
+      - ./web_servana:/app
+      - /app/node_modules
     depends_on:
       - backend
     networks:
