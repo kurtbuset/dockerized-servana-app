@@ -7,3 +7,6 @@
 [submodule "backend_servana"]
 	path = backend_servana
 	url = https://github.com/kurtbuset/backend_servana.git
+
+
+# execute this command to get these submudules: git submodule update --init --recursive
